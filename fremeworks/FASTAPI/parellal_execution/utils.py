@@ -2,22 +2,15 @@
 Execution Idea
 > 1000 * 24 * 52
 """
-from concurrent.futures import InterpreterPoolExecutor  
-import asyncio
-import time
+import numpy as np
 
-def async_run_as_sync(funs, *args, **kwargs):
-    return asyncio.run(funs(*args, **kwargs))
-
-async def twenty_four_week(chunks):
-    running_loop = asyncio.get_running_loop() 
-    with InterpreterPoolExecutor(max_workers=10) as executor:
-        tasks = [running_loop.run_in_executor(executor, fifty_two_week, i) for i in chunks]
-        await asyncio.gather(*tasks)
-        
-def fifty_two_week(sim):
-    
-    for i in range(52):
-        time.sleep(1)
-    
-    print("Done Simulation No.", sim)    
+def heavy_task():
+    # arr = np.arange(1, 2000)
+    # return arr
+    ...
+         
+def fifty_two_week(sim) -> None:
+    for safety_week in range(2, 25, 2):    
+        for i in range(52):
+            heavy_task()
+        print("Done Simulation No.", sim, "Safety Week No.", safety_week)    
