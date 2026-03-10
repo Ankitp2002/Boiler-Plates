@@ -1,0 +1,8 @@
+{
+  "session_id": "example",
+  "messages": [
+    { "role": "user", "content": "Help me learn LangGraph basics." },
+    { "role": "assistant", "content": "Sure — what’s your goal and timeframe?" }
+  ]
+}
+

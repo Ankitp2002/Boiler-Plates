@@ -1,0 +1,7 @@
+{
+  "tasks": [
+    { "id": "spec", "title": "Write a short spec", "status": "DONE", "depends_on": [] },
+    { "id": "impl", "title": "Implement the feature", "status": "TODO", "depends_on": ["spec"] },
+    { "id": "test", "title": "Add tests", "status": "TODO", "depends_on": ["impl"] }
+  ]
+}

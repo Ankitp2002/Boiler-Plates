@@ -1,0 +1,10 @@
+{
+  "note": "This is a placeholder for an index artifact (vector store / storage context).",
+  "created_by": "llamaindex_knowledgebot skeleton",
+  "version": "0.1"
+}
+
+{
+  "detail": "This is a placeholder for a persisted LlamaIndex index artifact. When you build a real index, you can replace this file with the serialized index representation (e.g., JSON or directory-based storage)."
+}
+

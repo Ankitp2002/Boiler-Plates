@@ -1,0 +1,2 @@
+"""CrewAI SkillBot skeleton project."""
+
