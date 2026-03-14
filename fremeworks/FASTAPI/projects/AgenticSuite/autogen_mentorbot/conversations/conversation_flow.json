@@ -1,0 +1,26 @@
+{
+  "version": "0.1",
+  "states": [
+    {
+      "id": "start",
+      "prompt": "Hi! What are you trying to learn today?",
+      "transitions": [{ "on": "user_message", "to": "clarify" }]
+    },
+    {
+      "id": "clarify",
+      "prompt": "Tell me your goal, your current level, and your time constraint.",
+      "transitions": [{ "on": "user_message", "to": "plan" }]
+    },
+    {
+      "id": "plan",
+      "prompt": "I will propose a learning plan and a small exercise.",
+      "transitions": [{ "on": "user_message", "to": "iterate" }]
+    },
+    {
+      "id": "iterate",
+      "prompt": "We can refine the plan, add examples, or do a quick quiz. Type 'exit' to quit.",
+      "transitions": [{ "on": "user_message", "to": "iterate" }]
+    }
+  ]
+}
+
