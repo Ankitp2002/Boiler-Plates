@@ -11,7 +11,7 @@ client = chromadb.PersistentClient(path="./chroma_db")
 ef = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
 collection = client.get_collection(name="notes")
 
-def rag_query(query, top_k=3):
+def rag_query(query, *args, **kwargs):
     """Retrieval Augmented Generation."""
     # Embed query
     query_emb = embedder.encode([query])
@@ -19,7 +19,7 @@ def rag_query(query, top_k=3):
     # Retrieve relevant chunks
     results = collection.query(
         query_embeddings=query_emb.tolist(),
-        n_results=top_k
+        n_results=3
     )
     
     context = "\n".join(results['documents'][0])
@@ -27,16 +27,16 @@ def rag_query(query, top_k=3):
     # Prompt for Llama
     prompt = f"""You are a helpful assistant using my notes. Answer based ONLY on this context:
 
-CONTEXT:
-{context}
+            CONTEXT:
+            {context}
 
-QUESTION: {query}
+            QUESTION: {query}
 
-ANSWER:"""
+            ANSWER:"""
     
     # Ollama response
     response = ollama.chat(
-        model='llama3.2:3b',
+        model='llama3.2:1b',
         messages=[{'role': 'user', 'content': prompt}]
     )
     
