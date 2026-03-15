@@ -11,13 +11,28 @@ from preprocessor import preprocess_text, get_vectorizer
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.express as px
+import os 
+import requests
+import zipfile
+import io
 
 def load_data():
-    """Load SMS Spam dataset from UCI."""
+    """Download and load SMS Spam dataset from UCI."""
+
     url = "https://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip"
-    # For local: download and unzip, then:
-    df = pd.read_csv('SMSSpamCollection', sep='\t', names=['label', 'text'])
-    df['text'] = df['text'].apply(preprocess_text)
+    data_file = "SMSSpamCollection"
+
+    # Download if file does not exist
+    if not os.path.exists(data_file):
+        print("Downloading dataset...")
+        response = requests.get(url)
+        zip_file = zipfile.ZipFile(io.BytesIO(response.content))
+        zip_file.extractall()
+
+    # Load dataset
+    df = pd.read_csv(data_file, sep="\t", names=["label", "text"])
+    # Apply preprocessing
+    df["text"] = df["text"].apply(preprocess_text)
     return df
 
 def train_models():
