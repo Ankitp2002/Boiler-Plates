@@ -49,7 +49,7 @@ class DataAnalyzer:
         
         cat_cols = [col for col, dtype in self.dtypes_detected.items() if dtype == 'categorical']
         for col in cat_cols[:4]:
-            fig = px.bar(self.df[col].value_counts().reset_index(), x='index', y=col, title=f'{col} Counts')
+            fig = px.bar(self.df[col].value_counts().rename_axis(col).reset_index(name="count"), x="count", y=col, title=f'{col} Counts')
             figs[col] = fig
         
         return figs
